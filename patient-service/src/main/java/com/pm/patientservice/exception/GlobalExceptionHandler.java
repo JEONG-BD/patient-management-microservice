@@ -11,9 +11,9 @@ import java.util.HashMap;
 import java.util.Map;
 
 @ControllerAdvice
-public class GlocalExceptionHandler {
+public class GlobalExceptionHandler {
 
-    private static final Logger log = LoggerFactory.getLogger(GlocalExceptionHandler.class);
+    private static final Logger log = LoggerFactory.getLogger(GlobalExceptionHandler.class);
 
     @ExceptionHandler(MethodArgumentNotValidException.class)
     public ResponseEntity<Map<String, String>> handleValidationException(MethodArgumentNotValidException ex){
@@ -30,7 +30,16 @@ public class GlocalExceptionHandler {
     public ResponseEntity<Map<String, String>> handleEmailAllAlreadyExistsException(EmailAlreadyExistsException ex){
         log.warn("Email address already exist {}", ex.getMessage());
         Map<String, String> errors = new HashMap<>();
-        errors.put("message", "Email address alreaady exists");
+        errors.put("message", "Email address already exists");
         return ResponseEntity.badRequest().body(errors);
+    }
+
+    @ExceptionHandler(PatientNotFoundException.class)
+    public ResponseEntity<Map<String, String>> handlePatientNotFoundException(PatientNotFoundException ex){
+        log.warn("Patient not found {}", ex.getMessage());
+        Map<String, String> errors = new HashMap<>();
+        errors.put("message", "Patient not found");
+        return ResponseEntity.badRequest().body(errors);
+
     }
 }
