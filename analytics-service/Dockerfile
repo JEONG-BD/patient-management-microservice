@@ -14,7 +14,7 @@ FROM openjdk:21-jdk AS runner
 
 WORKDIR /app
 
-COPY --from=builder ./app/target/analystics-service-1.0-SNAPSHOT.jar ./app.jar
+COPY --from=builder ./app/target/analytics-service-1.0-SNAPSHOT.jar ./app.jar
 
 EXPOSE 4002
 EXPOSE 9001
