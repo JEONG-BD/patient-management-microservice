@@ -1,2 +1,5 @@
 **/target/
 **/*.jar
+**/cdk.out|
+cdk.out
+*.pkg
