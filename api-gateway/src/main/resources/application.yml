@@ -4,15 +4,34 @@ spring:
   cloud:
     gateway:
       routes:
+        ## patient
         - id: patient-service-route
           uri: http://patient-service:4000
           predicates:
             - Path=/api/patients/**
           filters:
             - StripPrefix=1
+
         - id: api-docs-patient-route
           uri: http://patient-service:4000
           predicates:
             - Path=/api-docs/patients
           filters:
             - RewritePath=/api-docs/patients, /v3/api-docs
+
+        ## auth
+        - id: auth-service-route
+          uri: http://auth-service:4005
+          predicates:
+            - Path=/api/auth/**
+          filters:
+            - StripPrefix=1
+
+        - id: api-docs-auth-route
+          uri: http://auth-service:4005
+          predicates:
+            - Path=/auth/api-docs
+          filters:
+            - RewritePath=/auth/api-docs, /v3/api-docs
+
+    
